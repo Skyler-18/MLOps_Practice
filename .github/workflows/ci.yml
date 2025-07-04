@@ -24,6 +24,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Create model directory
+      run: mkdir -p model
+
+    - name: Download model.pkl from Google Drive
+      run: |
+        FILE_ID=1owtzeQ_prCrWpaXunjBJFar5fGhaNY9O
+        curl -L -o model/model.pkl "https://drive.google.com/uc?export=download&id=$FILE_ID"
+
     - name: Test FastAPI app starts (basic checks)
       run: |
         uvicorn app.main:app --host 0.0.0.0 --port 8000 &

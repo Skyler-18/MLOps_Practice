@@ -12,6 +12,11 @@ COPY ./requirements.txt .
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Download the model
+RUN apt-get update && apt-get install -y curl && \
+    mkdir -p model && \
+    curl -L -o model/model.pkl "https://drive.google.com/uc?export=download&id=1owtzeQ_prCrWpaXunjBJFar5fGhaNY9O"
+
 # Expose FastAPI's default port
 EXPOSE 8000
 
